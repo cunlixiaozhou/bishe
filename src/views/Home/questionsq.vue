@@ -9,21 +9,21 @@
         
         <!-----详情信息 S-------->
         <div class="vistInfo">
-        	<h1><span>[已采纳]&nbsp;</span>电子烟有害吗？电子烟有什么危害？电子烟有害吗？电子烟有什么危害？电子烟有害吗？电子烟有什么危害？</h1>
+        	<h1><span>[已采纳]&nbsp;</span>{{content}}</h1>
             
         	<div class="fui">
                 <div class="time">2小时前 <span>提问</span></div>
                 <div class="Appreciation"><i></i><span>10</span></div>
             </div>
             
-            <div class="content">
+     <!--       <div class="content">
             唉，又看到了这个关于“敢不敢”的话题了，记得前不久，因为北京同仁堂蜂蜜造假事件，我回答过“你还敢相信那些所谓的大品牌吗”这个问题。
 
 什么时候开始，作为一个消费者，在买东西、住酒店之前，不是先问问自己的钱包：你能不能支付呀？而是问自己：你敢不敢消费呀？以前是没钱不能花，现在是有钱不敢花，真是可笑又可悲!
 
 酒店为什么使用白床单而不是其他颜色较深的，如黑色和棕色的床单呢？这样即使被单、床单脏了，我们消费者仅凭肉眼不是很难察觉吗？其实酒店最初使用白色床单就是为了让顾客满意，白色的被单除了给人留下一种如同白云般舒适柔软的感觉之外，还传达给顾客一个重要的信息，干净、清洁，让顾客更加信任该酒店。
 
-            </div>
+            </div> -->
             
             <div class="vice-info">
             	<a class="MydaBut" id="MydaBut" @click="responsedQuestion"><i>答</i><span>我来答</span></a>
@@ -70,14 +70,14 @@
                 </div>
             </div>        
             <div class="pageType">
-            <ul class="pagination">
+           <!-- <ul class="pagination">
             	<li class="disabled"><dl>上一页</dl></li>
                 <li class="active"><span>1</span></li>
                 <li><a href="">2</a></li>
                 <li><a href="">3</a></li>
                 <li><a href="">下一页</a></li>
                 <li class='pageRemark'>共<b>3</b>页 <b>43</b>条数据</li>
-            </ul>
+            </ul> -->
             </div>    
         </div>
     </div>
@@ -98,17 +98,19 @@
 				questionData:'',
 				showForm:false,
 				value:'',
-				textMessage:[]
+				textMessage:[],
+				content:[]
 			}
 		},
 		mounted(){
+			this.content = this.$route.query.data;
 			this.getQuestionData();
 			this.findCommentData();
 		},
 		methods:{
 			findCommentData(){
 				let para = {
-						entityId:'1',
+						entityId:'334',
 						entityType:'1'
 				};
 				let headerToken = {
@@ -142,7 +144,7 @@
 					this.deleteComment = res.data.message
 					if(this.deleteComment ==='删除成功'){
 						alert(this.deleteComment)
-						this.getaddCommentData()
+						// this.getaddCommentData()
 					}else{
 						alert(this.deleteComment)
 					}
@@ -181,7 +183,7 @@
 				}
 				this.$http.get('/api/question/getLaststQuestions',{
 					params:para,
-					headers:authorization
+					headers:headerToken
 				}).then((res)=>{
 					this.questionData = res.data.res
 					console.log(this.questionData)

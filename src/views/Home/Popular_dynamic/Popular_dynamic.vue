@@ -102,7 +102,7 @@
 				let para = {
 						content:this.value,
 						entityId:'1',
-						entityType:'2'
+						entityType:'1'
 				};
 				let headerToken = {
 					authorization:window.localStorage.getItem('currentUser_token')

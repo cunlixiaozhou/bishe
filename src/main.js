@@ -25,7 +25,6 @@ const router = new VueRouter({
 routes  
 });  
 // router.beforeEach((to, from, next) => {
-// 	if (to.matched.some(record => record.meta.requireAuth)){
 // 	let token = sessionStorage.getItem('token');
 // 	 if (to.path == '/login') {
 //     sessionStorage.removeItem('token');
@@ -35,10 +34,8 @@ routes
 //     next({ path: '/login' })
 //   } else {
 //     next()
-//   }
-// }		
+//   }		
 // });
- 
 new Vue({
   //el: '#app',
   //template: '<App/>',

@@ -12,7 +12,8 @@ export default new Vuex.Store({
 //		users:user
 //	},
 	state:{  
-		token:''  
+		token:'',
+		attenArr:JSON.parse(sessionStorage.getItem("attenArr")) ||[],
 		},
 		
 	mutations:{  
@@ -23,6 +24,10 @@ export default new Vuex.Store({
 	del_token(state) {  
 		state.token = ''
 		sessionStorage.removeItem('token')
-	}  
+	},
+	 getAttenData(state,arr){
+		 sessionStorage.setItem('attenArr',arr);
+		 state.attenArr = arr
+	 }
 	}   
 	})

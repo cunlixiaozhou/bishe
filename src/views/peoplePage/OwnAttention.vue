@@ -1,25 +1,35 @@
 <template>
 	<div>
-		<div class="AskItemList" v-for="item in AttentionData">
-        	<!--<div class="top">
-            	<div class="info">
-                	<span style="color:#666;">2小时前&nbsp;</span><span>来自&nbsp;</span><a href="" class="uname">xiezhengyi1986</a><span>&nbsp;的提问</span>
-                	<h2 class="title">{{item.title}}</h2>
-               </div>
-            </div>-->
-            <div class="desc">
-            	<img :src="item.headUrl" class="cover">
-                <div class="c">
-                	{{item.name}}
-                </div>
-        	</div>
-            <div class="tags">
-            	<a href="">html</a>
-                <div class="share_bar_con">
-                	<el-button @click="attenFun(index)" type="primary" class="zg-btn zg-btn-follow zm-rich-follow-btn small nth-0">{{message}}</el-button>
-                </div>
-            </div>
-        </div>
+		<div>{{attentionData}}</div>
+		<section class="aui-flexView">
+			<section class="aui-scrollView">
+				<div class="aui-tab" data-ydui-tab>
+					<div class="tab-panel">
+						<div class="tab-panel-item tab-active">
+							<a  class="aui-flex b-line">
+								<div class="aui-comm-user">
+									<!-- <img src="../../../assets/user-001.png" alt=""> -->
+								</div>
+								<div class="aui-flex-box"v-for="(item,index) in attentionData">
+									<h2>{{item.userName}}</h2>
+									<h3>{{item.question}}</h3>
+									<h3>{{item.attention}}</h3>
+									<p>{{item.dianzan}}</p>
+								</div>
+								<!-- <div class="aui-follow">
+									<span @click="attenFun(item,index)"><i>+</i>{{item.flag?'关注':'已关注'}}</span>
+	
+								</div> -->
+							</a>
+						</div>
+					</div>
+				</div>
+				<div style="height:60px;"></div>
+	
+			</section>
+	
+		</section>
+	
 	</div>
 </template>
 
@@ -28,7 +38,15 @@
 		data(){
 			return{
 				AttentionData:'',
-				message:''
+				message:'',
+				attentionData:[]
+			}
+		},
+		created() {
+			if(sessionStorage.getItem("attenArr")){
+				const this_ = this
+				this_.attentionData =this.$store.state.attenArr
+				console.log(this_.attentionData)
 			}
 		},
 		mounted(){
@@ -41,20 +59,20 @@
 					offset:'0',
 					limit:'10'
 				}
-				let headerToken = {
-					authorization:sessionStorage.getItem('token')
-				}
-				this.$http.get('/api/follow/getFollowees',{
-					params:para,
-					headers:headerToken
-				}).then((res)=>{
-					this.AttentionData = res.data.res.users
-					console.log(this.AttentionData)
-				},error=>{})
+// 				let headerToken = {
+// 					authorization:sessionStorage.getItem('token')
+// 				}
+// 				this.$http.get('/api/follow/getFollowees',{
+// 					params:para,
+// 					headers:headerToken
+// 				}).then((res)=>{
+// 					this.AttentionData = res.data.res.users
+// 					console.log(this.AttentionData)
+// 				},error=>{})
 			},
 		}
 	}
 </script>
-<style src="../../css/style.css">
+<style src="../../css/style.css"></style>
 <style>
 </style>

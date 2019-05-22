@@ -4,7 +4,8 @@
         	<div class="top">
             	<div class="info">
                 	<span style="color:#666;">{{item.createTime}}</span><span>来自&nbsp;</span><a href="" class="uname">xiezhengyi1986</a><span>&nbsp;的提问</span>
-                	<a href="vist.html" class="title">{{item.title}}</a>
+					<a  class="title" @click="ClickFunQuetion(item)">{{item.title}}</a>
+                	<!-- <a href="#" class="title">{{item.title}}</a> -->
                 </div>
                 <!--<div class="da">
                 	<span><em>24</em><dl>已有回答</dl></span>
@@ -57,6 +58,11 @@
 				this.value = ''
 				this.getaddCommentData()
 				
+			},
+			ClickFunQuetion(data){
+				this.$router.push({
+					path:'/questionsq',
+				})
 			},
 			getQuestionData(){
 				let para = {
